@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 /**
  * Contact controller.
@@ -45,10 +46,31 @@ class ContactController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($contact);
-            $em->flush();
 
-            return $this->redirectToRoute('contact_show', array('id' => $contact->getId()));
+            $pictureFile = $form->get('picture')->getData();
+
+            //check if a picture was uploaded and process it if so
+            if ($pictureFile) {
+                $newFilename = uniqid() . '.' . $pictureFile->guessExtension();
+
+                //move the file to the directory where pictures are stored
+                try {
+                    $pictureFile->move(
+                        $this->getParameter('pictures_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    //TODO: handle upload issues
+                }
+
+                //save the picture filename instead of the content
+                $contact->setPicture($newFilename);
+
+                $em->persist($contact);
+                $em->flush();
+
+                return $this->redirectToRoute('contact_show', array('id' => $contact->getId()));
+            }
         }
 
         return $this->render('contact/new.html.twig', array(
@@ -105,7 +127,6 @@ class ContactController extends Controller
         $em->remove($contact);
         $em->flush();
 
-        //$this->addFlash('notice', 'Todo removed');
         return $this->redirectToRoute('contact_index');
     }
 }
