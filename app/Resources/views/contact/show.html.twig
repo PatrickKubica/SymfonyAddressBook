@@ -43,7 +43,13 @@
             </tr>
             <tr>
                 <th>Picture</th>
-                <td><a href="{{ asset('uploads/pictures/' ~ contact.picture) }}">View picture</a></td>
+                <td>
+                    {% if contact.picture %}
+                       <a href="{{ asset('uploads/pictures/' ~ contact.picture) }}">View picture</a>
+                    {% else %}
+                        No Picture available
+                    {% endif %}
+                </td>
             </tr>
         </tbody>
     </table>

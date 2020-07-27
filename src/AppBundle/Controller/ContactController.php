@@ -65,12 +65,11 @@ class ContactController extends Controller
 
                 //save the picture filename instead of the content
                 $contact->setPicture($newFilename);
-
-                $em->persist($contact);
-                $em->flush();
-
-                return $this->redirectToRoute('contact_show', array('id' => $contact->getId()));
             }
+            $em->persist($contact);
+            $em->flush();
+
+            return $this->redirectToRoute('contact_show', array('id' => $contact->getId()));
         }
 
         return $this->render('contact/new.html.twig', array(

@@ -80,7 +80,7 @@ class Contact
     /**
      * @var string
      *
-     * @ORM\Column(name="picture", type="string", length=255)
+     * @ORM\Column(name="picture", type="string", length=255, nullable=true)
      */
     private $picture;
 
@@ -311,4 +311,3 @@ class Contact
         return $this->picture;
     }
 }
-
