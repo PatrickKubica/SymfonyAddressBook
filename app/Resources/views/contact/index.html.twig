@@ -31,7 +31,13 @@
                 <td>{{ contact.phoneNumber }}</td>
                 <td>{% if contact.birthday %}{{ contact.birthday|date('Y-m-d') }}{% endif %}</td>
                 <td>{{ contact.emailAddress }}</td>
-                <td><a href="{{ asset('uploads/pictures/' ~ contact.picture) }}">View picture</a></td>
+                <td>
+                    {% if contact.picture %}
+                        <a href="{{ asset('uploads/pictures/' ~ contact.picture) }}">View picture</a>
+                    {% else %}
+                        No Picture available
+                    {% endif %}
+                </td>
                 <td>
                     <ul>
                         <li>
