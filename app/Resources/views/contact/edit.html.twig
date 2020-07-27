@@ -10,12 +10,10 @@
 
     <ul>
         <li>
-            <a href="{{ path('contact_index') }}">Back to the list</a>
+            <a href="{{ path('contact_delete', { 'id': contact.id }) }}">delete</a>
         </li>
         <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
+            <a href="{{ path('contact_index') }}">Back to the list</a>
         </li>
     </ul>
 {% endblock %}
