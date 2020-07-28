@@ -56,6 +56,7 @@ class ContactController extends Controller
             $em->persist($contact);
             $em->flush();
 
+            $this->addFlash('notice', 'Contact added');
             return $this->redirectToRoute('contact_show', array('id' => $contact->getId()));
         }
 
@@ -100,6 +101,7 @@ class ContactController extends Controller
             $em->persist($contact);
             $em->flush();
 
+            $this->addFlash('notice', 'Contact edited');
             return $this->redirectToRoute('contact_index');
         }
 
@@ -121,6 +123,7 @@ class ContactController extends Controller
         $em->remove($contact);
         $em->flush();
 
+        $this->addFlash('notice', 'Contact deleted');
         return $this->redirectToRoute('contact_index');
     }
 
@@ -139,7 +142,7 @@ class ContactController extends Controller
                 $newFilename
             );
         } catch (FileException $e) {
-            //TODO: handle upload issues
+            $this->addFlash('error', 'Picture could not be uploaded');
         }
 
         //save the picture filename instead of the content
