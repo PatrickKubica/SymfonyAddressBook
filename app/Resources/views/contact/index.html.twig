@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+{% block title %}Your Address Book{% endblock %}
 
 {% block body %}
     <h1 class="title">Your Address Book</h1>
@@ -39,26 +40,22 @@
                     {% endif %}
                 </td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('contact_show', { 'id': contact.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('contact_edit', { 'id': contact.id }) }}">edit</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('contact_delete', { 'id': contact.id }) }}">delete</a>
-                        </li>
-                    </ul>
+                    <div>
+                        <a class="button is-light" href="{{ path('contact_show', { 'id': contact.id }) }}">show</a>
+                    </div>
+                    <div class="mbt-1">
+                        <a class="button is-warning is-light" href="{{ path('contact_edit', { 'id': contact.id }) }}">edit</a>
+                    </div>
+                    <div>
+                        <a class="button is-danger is-light" href="{{ path('contact_delete', { 'id': contact.id }) }}">delete</a>
+                    </div>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('contact_new') }}">Create a new contact</a>
-        </li>
-    </ul>
+    <div>
+        <a class="button is-primary" href="{{ path('contact_new') }}">Create a new contact</a>
+    </div>
 {% endblock %}
