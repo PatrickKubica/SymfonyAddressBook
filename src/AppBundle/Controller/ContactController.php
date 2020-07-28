@@ -51,20 +51,7 @@ class ContactController extends Controller
 
             //check if a picture was uploaded and process it if so
             if ($pictureFile) {
-                $newFilename = uniqid() . '.' . $pictureFile->guessExtension();
-
-                //move the file to the directory where pictures are stored
-                try {
-                    $pictureFile->move(
-                        $this->getParameter('pictures_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    //TODO: handle upload issues
-                }
-
-                //save the picture filename instead of the content
-                $contact->setPicture($newFilename);
+                $this->handlePictureUpload($pictureFile, $contact);
             }
             $em->persist($contact);
             $em->flush();
@@ -103,7 +90,15 @@ class ContactController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $em = $this->getDoctrine()->getManager();
+            $pictureFile = $editForm->get('picture')->getData();
+
+            //check if a picture was uploaded and process it if so
+            if ($pictureFile) {
+                $this->handlePictureUpload($pictureFile, $contact);
+            }
+            $em->persist($contact);
+            $em->flush();
 
             return $this->redirectToRoute('contact_index');
         }
@@ -127,5 +122,27 @@ class ContactController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('contact_index');
+    }
+
+    /**
+     * Process uploaded picture
+     */
+    private function handlePictureUpload($pictureFile, $contact)
+    {
+        //In a real application we would scope picture data depending on the currently logged in user 
+        $newFilename = uniqid() . '.' . $pictureFile->guessExtension();
+
+        //move the file to the directory where pictures are stored
+        try {
+            $pictureFile->move(
+                $this->getParameter('pictures_directory'),
+                $newFilename
+            );
+        } catch (FileException $e) {
+            //TODO: handle upload issues
+        }
+
+        //save the picture filename instead of the content
+        $contact->setPicture($newFilename);
     }
 }
