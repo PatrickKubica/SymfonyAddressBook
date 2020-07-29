@@ -14,18 +14,20 @@ Please make sure that you adjust the configuration in
 
 While developing I have been using sqlite, to do so you need to add a `database_path` to `app\config\parameters.yml`. Please make sure that you created the directory that holds your database and run
 ```bash
-bin/console doctrine:database:create
+php bin/console doctrine:database:create
 ```
 
 and execute
 ```bash
-bin/console doctrine:schema:create
+php bin/console doctrine:schema:create
 ```
 to let doctrine create the correct database schema for this application.
 
 Run
 ```bash
-bin/console bin/console server:run
+php bin/console bin/console server:run
 ```
 
 and the application is ready and waiting for you on http://127.0.0.1:8000/
+
+This application was tested on PHP 7.2 and PHP 7.3
