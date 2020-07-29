@@ -3,17 +3,17 @@
 {% endblock %}
 
 {% block body %}
-	<h1 class="title">Edit Contact</h1>
+    <h1 class="title">Edit Contact</h1>
 
-	{{ form_start(edit_form) }}
-	{{ form_widget(edit_form) }}
-	<input class="button is-warning" type="submit" value="Edit"/>
-	{{ form_end(edit_form) }}
+    {{ form_start(edit_form) }}
+    {{ form_widget(edit_form) }}
+    <input class="button is-warning" type="submit" value="Edit"/>
+    {{ form_end(edit_form) }}
 
-	<div>
-		<a class="button is-danger mt-2" href="{{ path('contact_delete', { 'id': contact.id }) }}">delete</a>
-	</div>
-	<div>
-		<a class="button mt-2" href="{{ path('contact_index') }}">Back to the list</a>
-	</div>
+    <div>
+        <a class="button is-danger mt-2" href="{{ path('contact_delete', { 'id': contact.id }) }}">delete</a>
+    </div>
+    <div>
+        <a class="button mt-2" href="{{ path('contact_index') }}">Back to the list</a>
+    </div>
 {% endblock %}

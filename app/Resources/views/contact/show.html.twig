@@ -3,72 +3,72 @@
 {% endblock %}
 
 {% block body %}
-	<h1 class="title">Contact</h1>
+    <h1 class="title">Contact</h1>
 
-	<div class="columns">
-		<div class="column">
-			<table class="table">
-				<tbody>
-					<tr>
-						<th>Id</th>
-						<td>{{ contact.id }}</td>
-					</tr>
-					<tr>
-						<th>Firstname</th>
-						<td>{{ contact.firstname }}</td>
-					</tr>
-					<tr>
-						<th>Lastname</th>
-						<td>{{ contact.lastname }}</td>
-					</tr>
-					<tr>
-						<th>Street</th>
-						<td>{{ contact.street }}</td>
-					</tr>
-					<tr>
-						<th>Zip</th>
-						<td>{{ contact.zip }}</td>
-					</tr>
-					<tr>
-						<th>Country</th>
-						<td>{{ contact.country }}</td>
-					</tr>
-					<tr>
-						<th>Phonenumber</th>
-						<td>{{ contact.phoneNumber }}</td>
-					</tr>
-					<tr>
-						<th>Birthday</th>
-						<td>
-							{% if contact.birthday %}
-								{{ contact.birthday|date('Y-m-d') }}
-							{% endif %}
-						</td>
-					</tr>
-					<tr>
-						<th>Emailaddress</th>
-						<td>{{ contact.emailAddress }}</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<div class="column">
-			{% if contact.picture %}
-				<figure class="image is-128x128">
-					<img src="{{ asset('uploads/pictures/' ~ contact.picture) }}">
-				</figure>
-			{% else %}
-				No Picture available
-			{% endif %}
-		</div>
-	</div>
-	<div>
-		<a class="button is-warning is-light mt-2" href="{{ path('contact_edit', { 'id': contact.id }) }}">edit</a>
-	</div>
-	<div>
-		<a class="button is-danger mt-2 is-light" href="{{ path('contact_delete', { 'id': contact.id }) }}">Delete</a>
-	</div>
-	<div>
-		<a class="button mt-2" href="{{ path('contact_index') }}">Back to the list</a>
-	</div>
+    <div class="columns">
+        <div class="column">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ contact.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Firstname</th>
+                        <td>{{ contact.firstname }}</td>
+                    </tr>
+                    <tr>
+                        <th>Lastname</th>
+                        <td>{{ contact.lastname }}</td>
+                    </tr>
+                    <tr>
+                        <th>Street</th>
+                        <td>{{ contact.street }}</td>
+                    </tr>
+                    <tr>
+                        <th>Zip</th>
+                        <td>{{ contact.zip }}</td>
+                    </tr>
+                    <tr>
+                        <th>Country</th>
+                        <td>{{ contact.country }}</td>
+                    </tr>
+                    <tr>
+                        <th>Phonenumber</th>
+                        <td>{{ contact.phoneNumber }}</td>
+                    </tr>
+                    <tr>
+                        <th>Birthday</th>
+                        <td>
+                            {% if contact.birthday %}
+                                {{ contact.birthday|date('Y-m-d') }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Emailaddress</th>
+                        <td>{{ contact.emailAddress }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="column">
+            {% if contact.picture %}
+                <figure class="image is-128x128">
+                    <img src="{{ asset('uploads/pictures/' ~ contact.picture) }}">
+                </figure>
+            {% else %}
+                No Picture available
+            {% endif %}
+        </div>
+    </div>
+    <div>
+        <a class="button is-warning is-light mt-2" href="{{ path('contact_edit', { 'id': contact.id }) }}">edit</a>
+    </div>
+    <div>
+        <a class="button is-danger mt-2 is-light" href="{{ path('contact_delete', { 'id': contact.id }) }}">Delete</a>
+    </div>
+    <div>
+        <a class="button mt-2" href="{{ path('contact_index') }}">Back to the list</a>
+    </div>
 {% endblock %}
