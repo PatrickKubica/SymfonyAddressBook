@@ -23,9 +23,9 @@ bin/console doctrine:schema:create
 ```
 to let doctrine create the correct database schema for this application.
 
-run
+Run
 ```bash
 bin/console bin/console server:run
 ```
 
-And the application is ready and waiting for you on http://127.0.0.1:8000/
+and the application is ready and waiting for you on http://127.0.0.1:8000/
