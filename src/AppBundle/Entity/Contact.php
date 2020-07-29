@@ -84,7 +84,6 @@ class Contact
      */
     private $picture;
 
-
     /**
      * Get id
      *
