@@ -6,6 +6,10 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Validator\Constraints\File;
 
 class ContactType extends AbstractType
@@ -15,9 +19,42 @@ class ContactType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('firstname')->add('lastname')->add('street')->add('zip')->add('country')->add('phoneNumber')->add('birthday')->add('emailAddress')
+        $builder
+            ->add('firstname', TextType::class, [
+                'attr' => ['class' => 'control mb-4'],
+                'label_attr' => ['class' => 'label mb-0'],
+            ])
+            ->add('lastname', TextType::class, [
+                'attr' => ['class' => 'control mb-4'],
+                'label_attr' => ['class' => 'label mb-0'],
+            ])
+            ->add('street', TextType::class, [
+                'attr' => ['class' => 'control mb-4'],
+                'label_attr' => ['class' => 'label mb-0'],
+            ])
+            ->add('zip', IntegerType::class, [
+                'attr' => ['class' => 'control mb-4'],
+                'label_attr' => ['class' => 'label mb-0'],
+            ])
+            ->add('country', TextType::class, [
+                'attr' => ['class' => 'control mb-4'],
+                'label_attr' => ['class' => 'label mb-0'],
+            ])
+            ->add('phoneNumber', IntegerType::class, [
+                'attr' => ['class' => 'control mb-4'],
+                'label_attr' => ['class' => 'label mb-0'],
+            ])
+            ->add('birthday', DateType::class, [
+                'attr' => ['class' => 'control mb-4'],
+                'label_attr' => ['class' => 'label mb-0'],
+            ])
+            ->add('emailAddress', EmailType::class, [
+                'attr' => ['class' => 'control mb-4'],
+                'label_attr' => ['class' => 'label mb-0'],
+            ])
             ->add('picture', FileType::class, [
-                'label' => 'Picture',
+                'attr' => ['class' => 'control mb-4'],
+                'label_attr' => ['class' => 'label mb-0'],
                 'mapped' => false,
                 'required' => false,
                 //Improvement idea: define more constrains to limit filetypes user can upload
