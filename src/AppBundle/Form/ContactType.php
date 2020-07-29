@@ -29,10 +29,15 @@ class ContactType extends AbstractType
                 'label_attr' => ['class' => 'label mb-0'],
             ])
             ->add('street', TextType::class, [
+                'label' => 'Street and number',
                 'attr' => ['class' => 'control mb-4'],
                 'label_attr' => ['class' => 'label mb-0'],
             ])
             ->add('zip', IntegerType::class, [
+                'attr' => ['class' => 'control mb-4'],
+                'label_attr' => ['class' => 'label mb-0'],
+            ])
+            ->add('city', TextType::class, [
                 'attr' => ['class' => 'control mb-4'],
                 'label_attr' => ['class' => 'label mb-0'],
             ])

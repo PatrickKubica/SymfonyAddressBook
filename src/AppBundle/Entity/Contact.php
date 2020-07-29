@@ -52,6 +52,13 @@ class Contact
     /**
      * @var string
      *
+     * @ORM\Column(name="city", type="string", length=255)
+     */
+    private $city;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="country", type="string", length=255)
      */
     private $country;
@@ -188,6 +195,30 @@ class Contact
     public function getZip()
     {
         return $this->zip;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     *
+     * @return Contact
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
     }
 
     /**
