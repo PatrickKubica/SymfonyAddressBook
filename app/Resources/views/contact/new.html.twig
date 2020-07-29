@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
-{% block title %}Create a new Contact{% endblock %}
+{% block title %}Create a new Contact
+{% endblock %}
 
 {% block body %}
-    <h1 class="title">Create a new Contact</h1>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <input class="button is-primary mbt-1" type="submit" value="Create" />
-    {{ form_end(form) }}
-    <a class="button mt-3" href="{{ path('contact_index') }}">Back to the list</a>
+	<h1 class="title">Create a new Contact</h1>
+	{{ form_start(form) }}
+	{{ form_widget(form) }}
+	<input class="button is-primary mbt-1" type="submit" value="Create"/>
+	{{ form_end(form) }}
+	<a class="button mt-3" href="{{ path('contact_index') }}">Back to the list</a>
 {% endblock %}
