@@ -3,11 +3,11 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Contact;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Contact controller.
@@ -107,7 +107,7 @@ class ContactController extends Controller
 
         return $this->render('contact/edit.html.twig', array(
             'contact' => $contact,
-            'edit_form' => $editForm->createView()
+            'edit_form' => $editForm->createView(),
         ));
     }
 
@@ -132,7 +132,7 @@ class ContactController extends Controller
      */
     private function handlePictureUpload($pictureFile, $contact)
     {
-        //In a real application we would scope picture data depending on the currently logged in user 
+        //In a real application we would scope picture data depending on the currently logged in user
         $newFilename = uniqid() . '.' . $pictureFile->guessExtension();
 
         //move the file to the directory where pictures are stored

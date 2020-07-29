@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
-{% block title %}Your Address Book{% endblock %}
+{% block title %}Your Address Book
+{% endblock %}
 
 {% block body %}
     <h1 class="title">Your Address Book</h1>
@@ -21,37 +22,43 @@
             </tr>
         </thead>
         <tbody>
-        {% for contact in contacts %}
-            <tr>
-                <td><a href="{{ path('contact_show', { 'id': contact.id }) }}">{{ contact.id }}</a></td>
-                <td>{{ contact.firstname }}</td>
-                <td>{{ contact.lastname }}</td>
-                <td>{{ contact.street }}</td>
-                <td>{{ contact.zip }}</td>
-                <td>{{ contact.country }}</td>
-                <td>{{ contact.phoneNumber }}</td>
-                <td>{% if contact.birthday %}{{ contact.birthday|date('Y-m-d') }}{% endif %}</td>
-                <td>{{ contact.emailAddress }}</td>
-                <td>
-                    {% if contact.picture %}
-                        <a href="{{ asset('uploads/pictures/' ~ contact.picture) }}">View picture</a>
-                    {% else %}
-                        No Picture available
-                    {% endif %}
-                </td>
-                <td>
-                    <div>
-                        <a class="button is-light" href="{{ path('contact_show', { 'id': contact.id }) }}">show</a>
-                    </div>
-                    <div class="mbt-1">
-                        <a class="button is-warning is-light" href="{{ path('contact_edit', { 'id': contact.id }) }}">edit</a>
-                    </div>
-                    <div>
-                        <a class="button is-danger is-light" href="{{ path('contact_delete', { 'id': contact.id }) }}">delete</a>
-                    </div>
-                </td>
-            </tr>
-        {% endfor %}
+            {% for contact in contacts %}
+                <tr>
+                    <td>
+                        <a href="{{ path('contact_show', { 'id': contact.id }) }}">{{ contact.id }}</a>
+                    </td>
+                    <td>{{ contact.firstname }}</td>
+                    <td>{{ contact.lastname }}</td>
+                    <td>{{ contact.street }}</td>
+                    <td>{{ contact.zip }}</td>
+                    <td>{{ contact.country }}</td>
+                    <td>{{ contact.phoneNumber }}</td>
+                    <td>
+                        {% if contact.birthday %}
+                            {{ contact.birthday|date('Y-m-d') }}
+                        {% endif %}
+                    </td>
+                    <td>{{ contact.emailAddress }}</td>
+                    <td>
+                        {% if contact.picture %}
+                            <a href="{{ asset('uploads/pictures/' ~ contact.picture) }}">View picture</a>
+                        {% else %}
+                            No Picture available
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div>
+                            <a class="button is-light" href="{{ path('contact_show', { 'id': contact.id }) }}">show</a>
+                        </div>
+                        <div class="mbt-1">
+                            <a class="button is-warning is-light" href="{{ path('contact_edit', { 'id': contact.id }) }}">edit</a>
+                        </div>
+                        <div>
+                            <a class="button is-danger is-light" href="{{ path('contact_delete', { 'id': contact.id }) }}">delete</a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 
