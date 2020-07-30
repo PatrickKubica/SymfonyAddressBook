@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Service\FileUploader;
 
 /**
  * Contact controller.
@@ -38,7 +39,7 @@ class ContactController extends Controller
      * @Route("/new", name="contact_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, FileUploader $fileUploader)
     {
         $contact = new Contact();
         $form = $this->createForm('AppBundle\Form\ContactType', $contact);
@@ -47,11 +48,14 @@ class ContactController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
+            /** @var UploadedFile $pictureFile */
             $pictureFile = $form->get('picture')->getData();
 
             //check if a picture was uploaded and process it if so
             if ($pictureFile) {
-                $this->handlePictureUpload($pictureFile, $contact);
+                $pictureFileName = $fileUploader->upload($pictureFile);
+                //save the picture filename instead of the content
+                $contact->setPicture($pictureFileName);
             }
             $em->persist($contact);
             $em->flush();
@@ -85,18 +89,22 @@ class ContactController extends Controller
      * @Route("/{id}/edit", name="contact_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Contact $contact)
+    public function editAction(Request $request, Contact $contact, FileUploader $fileUploader)
     {
         $editForm = $this->createForm('AppBundle\Form\ContactType', $contact);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            /** @var UploadedFile $pictureFile */
             $pictureFile = $editForm->get('picture')->getData();
 
             //check if a picture was uploaded and process it if so
             if ($pictureFile) {
-                $this->handlePictureUpload($pictureFile, $contact);
+                $pictureFileName = $fileUploader->upload($pictureFile);
+                //save the picture filename instead of the content
+                $contact->setPicture($pictureFileName);
             }
             $em->persist($contact);
             $em->flush();
@@ -125,27 +133,5 @@ class ContactController extends Controller
 
         $this->addFlash('notice', 'Contact deleted');
         return $this->redirectToRoute('contact_index');
-    }
-
-    /**
-     * Process uploaded picture
-     */
-    private function handlePictureUpload($pictureFile, $contact)
-    {
-        //In a real application we would scope picture data depending on the currently logged in user
-        $newFilename = uniqid() . '.' . $pictureFile->guessExtension();
-
-        //move the file to the directory where pictures are stored
-        try {
-            $pictureFile->move(
-                $this->getParameter('pictures_directory'),
-                $newFilename
-            );
-        } catch (FileException $e) {
-            $this->addFlash('error', 'Picture could not be uploaded');
-        }
-
-        //save the picture filename instead of the content
-        $contact->setPicture($newFilename);
     }
 }
