@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
@@ -49,7 +50,7 @@ class ContactType extends AbstractType
                 'attr' => ['class' => 'control mb-4'],
                 'label_attr' => ['class' => 'label mb-0'],
             ])
-            ->add('birthday', DateType::class, [
+            ->add('birthday', BirthdayType::class, [
                 'attr' => ['class' => 'control mb-4'],
                 'label_attr' => ['class' => 'label mb-0'],
             ])
