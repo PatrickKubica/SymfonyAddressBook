@@ -25,9 +25,13 @@ to let doctrine create the correct database schema for this application.
 
 Run
 ```bash
-php bin/console bin/console server:run
+php bin/console server:run
 ```
 
 and the application is ready and waiting for you on http://127.0.0.1:8000/
 
 This application was tested on PHP 7.2 and PHP 7.3
+
+## See it in action
+
+![Address Book Demo](readme\addressbookdemo.gif)
