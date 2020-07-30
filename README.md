@@ -34,4 +34,4 @@ This application was tested on PHP 7.2 and PHP 7.3
 
 ## See it in action
 
-![Address Book Demo](readme\addressbookdemo.gif)
+![Address Book Demo](addressbookdemo.gif)
