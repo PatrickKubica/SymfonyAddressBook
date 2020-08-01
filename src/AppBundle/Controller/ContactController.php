@@ -3,12 +3,11 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Contact;
+use AppBundle\Service\FileUploader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Service\FileUploader;
 
 /**
  * Contact controller.
@@ -126,7 +125,6 @@ class ContactController extends Controller
      */
     public function deleteAction(Request $request, Contact $contact)
     {
-
         $em = $this->getDoctrine()->getManager();
         $em->remove($contact);
         $em->flush();
